@@ -106,9 +106,15 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
       }.bind(this));
     },
 
-    incremental: function(path) {
+    increment: function(path, value) {
       firebase.database(this.app).ref(path).transaction(function (current_value) {
-        return (current_value || 0) + 1;
+        return (current_value || 0) + value;
+      });
+    },
+
+    decrement: function(path, value) {
+      firebase.database(this.app).ref(path).transaction(function (current_value) {
+        return (current_value || 0) - value;
       });
     },
 
